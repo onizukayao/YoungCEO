@@ -18,7 +18,7 @@ public class MybatisUtil {
 	private static SqlSessionFactory sqlSessionFactory;
 	
 	/**
-	 * 通过单例模式创建SqlSessionFactory
+	 * 通过单例模式创建SqlSessionFactory 加油
 	 */
 	private static SqlSessionFactory getsqlSessionFactory(){
 		//String configPath="config.xml";
