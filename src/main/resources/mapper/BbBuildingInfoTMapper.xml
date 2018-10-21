@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.unicom.ceo.mapper.BbBuildingInfoTMapper" >
+  <resultMap id="BaseResultMap" type="com.unicom.ceo.model.BbBuildingInfoT" >
+    <id column="building_no" property="building_no" jdbcType="VARCHAR" />
+    <result column="building_name" property="building_name" jdbcType="VARCHAR" />
+    <result column="building_address" property="building_address" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="DECIMAL" />
+    <result column="latitude" property="latitude" jdbcType="DECIMAL" />
+    <result column="fixed_port" property="fixed_port" jdbcType="INTEGER" />
+    <result column="use_port" property="use_port" jdbcType="INTEGER" />
+    <result column="dealer_no" property="dealer_no" jdbcType="VARCHAR" />
+    <result column="building_status" property="building_status" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    building_no, building_name, building_address, longitude, latitude, fixed_port, use_port, 
+    dealer_no, building_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.unicom.ceo.model.BbBuildingInfoTExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bb_building_info_t
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from bb_building_info_t
+    where building_no = #{building_no,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from bb_building_info_t
+    where building_no = #{building_no,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.unicom.ceo.model.BbBuildingInfoTExample" >
+    delete from bb_building_info_t
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.unicom.ceo.model.BbBuildingInfoT" >
+    insert into bb_building_info_t (building_no, building_name, building_address, 
+      longitude, latitude, fixed_port, 
+      use_port, dealer_no, building_status
+      )
+    values (#{building_no,jdbcType=VARCHAR}, #{building_name,jdbcType=VARCHAR}, #{building_address,jdbcType=VARCHAR}, 
+      #{longitude,jdbcType=DECIMAL}, #{latitude,jdbcType=DECIMAL}, #{fixed_port,jdbcType=INTEGER}, 
+      #{use_port,jdbcType=INTEGER}, #{dealer_no,jdbcType=VARCHAR}, #{building_status,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicom.ceo.model.BbBuildingInfoT" >
+    insert into bb_building_info_t
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="building_no != null" >
+        building_no,
+      </if>
+      <if test="building_name != null" >
+        building_name,
+      </if>
+      <if test="building_address != null" >
+        building_address,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="fixed_port != null" >
+        fixed_port,
+      </if>
+      <if test="use_port != null" >
+        use_port,
+      </if>
+      <if test="dealer_no != null" >
+        dealer_no,
+      </if>
+      <if test="building_status != null" >
+        building_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="building_no != null" >
+        #{building_no,jdbcType=VARCHAR},
+      </if>
+      <if test="building_name != null" >
+        #{building_name,jdbcType=VARCHAR},
+      </if>
+      <if test="building_address != null" >
+        #{building_address,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="fixed_port != null" >
+        #{fixed_port,jdbcType=INTEGER},
+      </if>
+      <if test="use_port != null" >
+        #{use_port,jdbcType=INTEGER},
+      </if>
+      <if test="dealer_no != null" >
+        #{dealer_no,jdbcType=VARCHAR},
+      </if>
+      <if test="building_status != null" >
+        #{building_status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.unicom.ceo.model.BbBuildingInfoTExample" resultType="java.lang.Integer" >
+    select count(*) from bb_building_info_t
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bb_building_info_t
+    <set >
+      <if test="record.building_no != null" >
+        building_no = #{record.building_no,jdbcType=VARCHAR},
+      </if>
+      <if test="record.building_name != null" >
+        building_name = #{record.building_name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.building_address != null" >
+        building_address = #{record.building_address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.longitude != null" >
+        longitude = #{record.longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="record.latitude != null" >
+        latitude = #{record.latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fixed_port != null" >
+        fixed_port = #{record.fixed_port,jdbcType=INTEGER},
+      </if>
+      <if test="record.use_port != null" >
+        use_port = #{record.use_port,jdbcType=INTEGER},
+      </if>
+      <if test="record.dealer_no != null" >
+        dealer_no = #{record.dealer_no,jdbcType=VARCHAR},
+      </if>
+      <if test="record.building_status != null" >
+        building_status = #{record.building_status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bb_building_info_t
+    set building_no = #{record.building_no,jdbcType=VARCHAR},
+      building_name = #{record.building_name,jdbcType=VARCHAR},
+      building_address = #{record.building_address,jdbcType=VARCHAR},
+      longitude = #{record.longitude,jdbcType=DECIMAL},
+      latitude = #{record.latitude,jdbcType=DECIMAL},
+      fixed_port = #{record.fixed_port,jdbcType=INTEGER},
+      use_port = #{record.use_port,jdbcType=INTEGER},
+      dealer_no = #{record.dealer_no,jdbcType=VARCHAR},
+      building_status = #{record.building_status,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicom.ceo.model.BbBuildingInfoT" >
+    update bb_building_info_t
+    <set >
+      <if test="building_name != null" >
+        building_name = #{building_name,jdbcType=VARCHAR},
+      </if>
+      <if test="building_address != null" >
+        building_address = #{building_address,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="fixed_port != null" >
+        fixed_port = #{fixed_port,jdbcType=INTEGER},
+      </if>
+      <if test="use_port != null" >
+        use_port = #{use_port,jdbcType=INTEGER},
+      </if>
+      <if test="dealer_no != null" >
+        dealer_no = #{dealer_no,jdbcType=VARCHAR},
+      </if>
+      <if test="building_status != null" >
+        building_status = #{building_status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where building_no = #{building_no,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicom.ceo.model.BbBuildingInfoT" >
+    update bb_building_info_t
+    set building_name = #{building_name,jdbcType=VARCHAR},
+      building_address = #{building_address,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=DECIMAL},
+      latitude = #{latitude,jdbcType=DECIMAL},
+      fixed_port = #{fixed_port,jdbcType=INTEGER},
+      use_port = #{use_port,jdbcType=INTEGER},
+      dealer_no = #{dealer_no,jdbcType=VARCHAR},
+      building_status = #{building_status,jdbcType=VARCHAR}
+    where building_no = #{building_no,jdbcType=VARCHAR}
+  </update>
+</mapper>

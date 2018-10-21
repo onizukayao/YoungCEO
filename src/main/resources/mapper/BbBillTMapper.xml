@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.unicom.ceo.mapper.BbBillTMapper" >
+  <resultMap id="BaseResultMap" type="com.unicom.ceo.model.BbBillT" >
+    <id column="user_id" property="user_id" jdbcType="VARCHAR" />
+    <result column="fee_date" property="fee_date" jdbcType="VARCHAR" />
+    <result column="user_name" property="user_name" jdbcType="VARCHAR" />
+    <result column="fee" property="fee" jdbcType="DECIMAL" />
+    <result column="cell_id" property="cell_id" jdbcType="VARCHAR" />
+    <result column="discharge" property="discharge" jdbcType="VARCHAR" />
+    <result column="keyword" property="keyword" jdbcType="VARCHAR" />
+    <result column="user_status" property="user_status" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    user_id, fee_date, user_name, fee, cell_id, discharge, keyword, user_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.unicom.ceo.model.BbBillTExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bb_bill_t
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from bb_bill_t
+    where user_id = #{user_id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from bb_bill_t
+    where user_id = #{user_id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.unicom.ceo.model.BbBillTExample" >
+    delete from bb_bill_t
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.unicom.ceo.model.BbBillT" >
+    insert into bb_bill_t (user_id, fee_date, user_name, 
+      fee, cell_id, discharge, 
+      keyword, user_status)
+    values (#{user_id,jdbcType=VARCHAR}, #{fee_date,jdbcType=VARCHAR}, #{user_name,jdbcType=VARCHAR}, 
+      #{fee,jdbcType=DECIMAL}, #{cell_id,jdbcType=VARCHAR}, #{discharge,jdbcType=VARCHAR}, 
+      #{keyword,jdbcType=VARCHAR}, #{user_status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicom.ceo.model.BbBillT" >
+    insert into bb_bill_t
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="user_id != null" >
+        user_id,
+      </if>
+      <if test="fee_date != null" >
+        fee_date,
+      </if>
+      <if test="user_name != null" >
+        user_name,
+      </if>
+      <if test="fee != null" >
+        fee,
+      </if>
+      <if test="cell_id != null" >
+        cell_id,
+      </if>
+      <if test="discharge != null" >
+        discharge,
+      </if>
+      <if test="keyword != null" >
+        keyword,
+      </if>
+      <if test="user_status != null" >
+        user_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="user_id != null" >
+        #{user_id,jdbcType=VARCHAR},
+      </if>
+      <if test="fee_date != null" >
+        #{fee_date,jdbcType=VARCHAR},
+      </if>
+      <if test="user_name != null" >
+        #{user_name,jdbcType=VARCHAR},
+      </if>
+      <if test="fee != null" >
+        #{fee,jdbcType=DECIMAL},
+      </if>
+      <if test="cell_id != null" >
+        #{cell_id,jdbcType=VARCHAR},
+      </if>
+      <if test="discharge != null" >
+        #{discharge,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null" >
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="user_status != null" >
+        #{user_status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.unicom.ceo.model.BbBillTExample" resultType="java.lang.Integer" >
+    select count(*) from bb_bill_t
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bb_bill_t
+    <set >
+      <if test="record.user_id != null" >
+        user_id = #{record.user_id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fee_date != null" >
+        fee_date = #{record.fee_date,jdbcType=VARCHAR},
+      </if>
+      <if test="record.user_name != null" >
+        user_name = #{record.user_name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fee != null" >
+        fee = #{record.fee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cell_id != null" >
+        cell_id = #{record.cell_id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.discharge != null" >
+        discharge = #{record.discharge,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyword != null" >
+        keyword = #{record.keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.user_status != null" >
+        user_status = #{record.user_status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bb_bill_t
+    set user_id = #{record.user_id,jdbcType=VARCHAR},
+      fee_date = #{record.fee_date,jdbcType=VARCHAR},
+      user_name = #{record.user_name,jdbcType=VARCHAR},
+      fee = #{record.fee,jdbcType=DECIMAL},
+      cell_id = #{record.cell_id,jdbcType=VARCHAR},
+      discharge = #{record.discharge,jdbcType=VARCHAR},
+      keyword = #{record.keyword,jdbcType=VARCHAR},
+      user_status = #{record.user_status,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicom.ceo.model.BbBillT" >
+    update bb_bill_t
+    <set >
+      <if test="fee_date != null" >
+        fee_date = #{fee_date,jdbcType=VARCHAR},
+      </if>
+      <if test="user_name != null" >
+        user_name = #{user_name,jdbcType=VARCHAR},
+      </if>
+      <if test="fee != null" >
+        fee = #{fee,jdbcType=DECIMAL},
+      </if>
+      <if test="cell_id != null" >
+        cell_id = #{cell_id,jdbcType=VARCHAR},
+      </if>
+      <if test="discharge != null" >
+        discharge = #{discharge,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null" >
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="user_status != null" >
+        user_status = #{user_status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{user_id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicom.ceo.model.BbBillT" >
+    update bb_bill_t
+    set fee_date = #{fee_date,jdbcType=VARCHAR},
+      user_name = #{user_name,jdbcType=VARCHAR},
+      fee = #{fee,jdbcType=DECIMAL},
+      cell_id = #{cell_id,jdbcType=VARCHAR},
+      discharge = #{discharge,jdbcType=VARCHAR},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      user_status = #{user_status,jdbcType=VARCHAR}
+    where user_id = #{user_id,jdbcType=VARCHAR}
+  </update>
+</mapper>

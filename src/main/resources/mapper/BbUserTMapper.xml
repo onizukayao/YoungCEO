@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.unicom.ceo.mapper.BbUserTMapper" >
+  <resultMap id="BaseResultMap" type="com.unicom.ceo.model.BbUserT" >
+    <id column="user_id" property="user_id" jdbcType="VARCHAR" />
+    <result column="service_kind" property="service_kind" jdbcType="VARCHAR" />
+    <result column="user_name" property="user_name" jdbcType="VARCHAR" />
+    <result column="pspt_id" property="pspt_id" jdbcType="VARCHAR" />
+    <result column="user_prod" property="user_prod" jdbcType="VARCHAR" />
+    <result column="in_date" property="in_date" jdbcType="VARCHAR" />
+    <result column="ceo_id" property="ceo_id" jdbcType="VARCHAR" />
+    <result column="ceo_person" property="ceo_person" jdbcType="VARCHAR" />
+    <result column="dealer_id" property="dealer_id" jdbcType="VARCHAR" />
+    <result column="dealer_name" property="dealer_name" jdbcType="VARCHAR" />
+    <result column="building_no" property="building_no" jdbcType="VARCHAR" />
+    <result column="building_name" property="building_name" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    user_id, service_kind, user_name, pspt_id, user_prod, in_date, ceo_id, ceo_person, 
+    dealer_id, dealer_name, building_no, building_name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.unicom.ceo.model.BbUserTExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bb_user_t
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from bb_user_t
+    where user_id = #{user_id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from bb_user_t
+    where user_id = #{user_id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.unicom.ceo.model.BbUserTExample" >
+    delete from bb_user_t
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.unicom.ceo.model.BbUserT" >
+    insert into bb_user_t (user_id, service_kind, user_name, 
+      pspt_id, user_prod, in_date, 
+      ceo_id, ceo_person, dealer_id, 
+      dealer_name, building_no, building_name
+      )
+    values (#{user_id,jdbcType=VARCHAR}, #{service_kind,jdbcType=VARCHAR}, #{user_name,jdbcType=VARCHAR}, 
+      #{pspt_id,jdbcType=VARCHAR}, #{user_prod,jdbcType=VARCHAR}, #{in_date,jdbcType=VARCHAR}, 
+      #{ceo_id,jdbcType=VARCHAR}, #{ceo_person,jdbcType=VARCHAR}, #{dealer_id,jdbcType=VARCHAR}, 
+      #{dealer_name,jdbcType=VARCHAR}, #{building_no,jdbcType=VARCHAR}, #{building_name,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicom.ceo.model.BbUserT" >
+    insert into bb_user_t
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="user_id != null" >
+        user_id,
+      </if>
+      <if test="service_kind != null" >
+        service_kind,
+      </if>
+      <if test="user_name != null" >
+        user_name,
+      </if>
+      <if test="pspt_id != null" >
+        pspt_id,
+      </if>
+      <if test="user_prod != null" >
+        user_prod,
+      </if>
+      <if test="in_date != null" >
+        in_date,
+      </if>
+      <if test="ceo_id != null" >
+        ceo_id,
+      </if>
+      <if test="ceo_person != null" >
+        ceo_person,
+      </if>
+      <if test="dealer_id != null" >
+        dealer_id,
+      </if>
+      <if test="dealer_name != null" >
+        dealer_name,
+      </if>
+      <if test="building_no != null" >
+        building_no,
+      </if>
+      <if test="building_name != null" >
+        building_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="user_id != null" >
+        #{user_id,jdbcType=VARCHAR},
+      </if>
+      <if test="service_kind != null" >
+        #{service_kind,jdbcType=VARCHAR},
+      </if>
+      <if test="user_name != null" >
+        #{user_name,jdbcType=VARCHAR},
+      </if>
+      <if test="pspt_id != null" >
+        #{pspt_id,jdbcType=VARCHAR},
+      </if>
+      <if test="user_prod != null" >
+        #{user_prod,jdbcType=VARCHAR},
+      </if>
+      <if test="in_date != null" >
+        #{in_date,jdbcType=VARCHAR},
+      </if>
+      <if test="ceo_id != null" >
+        #{ceo_id,jdbcType=VARCHAR},
+      </if>
+      <if test="ceo_person != null" >
+        #{ceo_person,jdbcType=VARCHAR},
+      </if>
+      <if test="dealer_id != null" >
+        #{dealer_id,jdbcType=VARCHAR},
+      </if>
+      <if test="dealer_name != null" >
+        #{dealer_name,jdbcType=VARCHAR},
+      </if>
+      <if test="building_no != null" >
+        #{building_no,jdbcType=VARCHAR},
+      </if>
+      <if test="building_name != null" >
+        #{building_name,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.unicom.ceo.model.BbUserTExample" resultType="java.lang.Integer" >
+    select count(*) from bb_user_t
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bb_user_t
+    <set >
+      <if test="record.user_id != null" >
+        user_id = #{record.user_id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.service_kind != null" >
+        service_kind = #{record.service_kind,jdbcType=VARCHAR},
+      </if>
+      <if test="record.user_name != null" >
+        user_name = #{record.user_name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pspt_id != null" >
+        pspt_id = #{record.pspt_id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.user_prod != null" >
+        user_prod = #{record.user_prod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.in_date != null" >
+        in_date = #{record.in_date,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ceo_id != null" >
+        ceo_id = #{record.ceo_id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ceo_person != null" >
+        ceo_person = #{record.ceo_person,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dealer_id != null" >
+        dealer_id = #{record.dealer_id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dealer_name != null" >
+        dealer_name = #{record.dealer_name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.building_no != null" >
+        building_no = #{record.building_no,jdbcType=VARCHAR},
+      </if>
+      <if test="record.building_name != null" >
+        building_name = #{record.building_name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bb_user_t
+    set user_id = #{record.user_id,jdbcType=VARCHAR},
+      service_kind = #{record.service_kind,jdbcType=VARCHAR},
+      user_name = #{record.user_name,jdbcType=VARCHAR},
+      pspt_id = #{record.pspt_id,jdbcType=VARCHAR},
+      user_prod = #{record.user_prod,jdbcType=VARCHAR},
+      in_date = #{record.in_date,jdbcType=VARCHAR},
+      ceo_id = #{record.ceo_id,jdbcType=VARCHAR},
+      ceo_person = #{record.ceo_person,jdbcType=VARCHAR},
+      dealer_id = #{record.dealer_id,jdbcType=VARCHAR},
+      dealer_name = #{record.dealer_name,jdbcType=VARCHAR},
+      building_no = #{record.building_no,jdbcType=VARCHAR},
+      building_name = #{record.building_name,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicom.ceo.model.BbUserT" >
+    update bb_user_t
+    <set >
+      <if test="service_kind != null" >
+        service_kind = #{service_kind,jdbcType=VARCHAR},
+      </if>
+      <if test="user_name != null" >
+        user_name = #{user_name,jdbcType=VARCHAR},
+      </if>
+      <if test="pspt_id != null" >
+        pspt_id = #{pspt_id,jdbcType=VARCHAR},
+      </if>
+      <if test="user_prod != null" >
+        user_prod = #{user_prod,jdbcType=VARCHAR},
+      </if>
+      <if test="in_date != null" >
+        in_date = #{in_date,jdbcType=VARCHAR},
+      </if>
+      <if test="ceo_id != null" >
+        ceo_id = #{ceo_id,jdbcType=VARCHAR},
+      </if>
+      <if test="ceo_person != null" >
+        ceo_person = #{ceo_person,jdbcType=VARCHAR},
+      </if>
+      <if test="dealer_id != null" >
+        dealer_id = #{dealer_id,jdbcType=VARCHAR},
+      </if>
+      <if test="dealer_name != null" >
+        dealer_name = #{dealer_name,jdbcType=VARCHAR},
+      </if>
+      <if test="building_no != null" >
+        building_no = #{building_no,jdbcType=VARCHAR},
+      </if>
+      <if test="building_name != null" >
+        building_name = #{building_name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{user_id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicom.ceo.model.BbUserT" >
+    update bb_user_t
+    set service_kind = #{service_kind,jdbcType=VARCHAR},
+      user_name = #{user_name,jdbcType=VARCHAR},
+      pspt_id = #{pspt_id,jdbcType=VARCHAR},
+      user_prod = #{user_prod,jdbcType=VARCHAR},
+      in_date = #{in_date,jdbcType=VARCHAR},
+      ceo_id = #{ceo_id,jdbcType=VARCHAR},
+      ceo_person = #{ceo_person,jdbcType=VARCHAR},
+      dealer_id = #{dealer_id,jdbcType=VARCHAR},
+      dealer_name = #{dealer_name,jdbcType=VARCHAR},
+      building_no = #{building_no,jdbcType=VARCHAR},
+      building_name = #{building_name,jdbcType=VARCHAR}
+    where user_id = #{user_id,jdbcType=VARCHAR}
+  </update>
+</mapper>

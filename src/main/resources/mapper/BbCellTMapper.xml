@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.unicom.ceo.mapper.BbCellTMapper" >
+  <resultMap id="BaseResultMap" type="com.unicom.ceo.model.BbCellT" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <id column="cell_id" property="cell_id" jdbcType="VARCHAR" />
+    <result column="cell_name" property="cell_name" jdbcType="VARCHAR" />
+    <result column="cell_kind" property="cell_kind" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="DECIMAL" />
+    <result column="latitude" property="latitude" jdbcType="DECIMAL" />
+    <result column="lac" property="lac" jdbcType="VARCHAR" />
+    <result column="ci" property="ci" jdbcType="VARCHAR" />
+    <result column="building_no" property="building_no" jdbcType="VARCHAR" />
+    <result column="cell_status" property="cell_status" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, cell_id, cell_name, cell_kind, address, longitude, latitude, lac, ci, building_no, 
+    cell_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.unicom.ceo.model.BbCellTExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bb_cell_t
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.unicom.ceo.model.BbCellTKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from bb_cell_t
+    where id = #{id,jdbcType=INTEGER}
+      and cell_id = #{cell_id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.unicom.ceo.model.BbCellTKey" >
+    delete from bb_cell_t
+    where id = #{id,jdbcType=INTEGER}
+      and cell_id = #{cell_id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.unicom.ceo.model.BbCellTExample" >
+    delete from bb_cell_t
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.unicom.ceo.model.BbCellT" >
+    insert into bb_cell_t (id, cell_id, cell_name, 
+      cell_kind, address, longitude, 
+      latitude, lac, ci, 
+      building_no, cell_status)
+    values (#{id,jdbcType=INTEGER}, #{cell_id,jdbcType=VARCHAR}, #{cell_name,jdbcType=VARCHAR}, 
+      #{cell_kind,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{longitude,jdbcType=DECIMAL}, 
+      #{latitude,jdbcType=DECIMAL}, #{lac,jdbcType=VARCHAR}, #{ci,jdbcType=VARCHAR}, 
+      #{building_no,jdbcType=VARCHAR}, #{cell_status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicom.ceo.model.BbCellT" >
+    insert into bb_cell_t
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cell_id != null" >
+        cell_id,
+      </if>
+      <if test="cell_name != null" >
+        cell_name,
+      </if>
+      <if test="cell_kind != null" >
+        cell_kind,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="lac != null" >
+        lac,
+      </if>
+      <if test="ci != null" >
+        ci,
+      </if>
+      <if test="building_no != null" >
+        building_no,
+      </if>
+      <if test="cell_status != null" >
+        cell_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cell_id != null" >
+        #{cell_id,jdbcType=VARCHAR},
+      </if>
+      <if test="cell_name != null" >
+        #{cell_name,jdbcType=VARCHAR},
+      </if>
+      <if test="cell_kind != null" >
+        #{cell_kind,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="lac != null" >
+        #{lac,jdbcType=VARCHAR},
+      </if>
+      <if test="ci != null" >
+        #{ci,jdbcType=VARCHAR},
+      </if>
+      <if test="building_no != null" >
+        #{building_no,jdbcType=VARCHAR},
+      </if>
+      <if test="cell_status != null" >
+        #{cell_status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.unicom.ceo.model.BbCellTExample" resultType="java.lang.Integer" >
+    select count(*) from bb_cell_t
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bb_cell_t
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.cell_id != null" >
+        cell_id = #{record.cell_id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cell_name != null" >
+        cell_name = #{record.cell_name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cell_kind != null" >
+        cell_kind = #{record.cell_kind,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.longitude != null" >
+        longitude = #{record.longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="record.latitude != null" >
+        latitude = #{record.latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lac != null" >
+        lac = #{record.lac,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ci != null" >
+        ci = #{record.ci,jdbcType=VARCHAR},
+      </if>
+      <if test="record.building_no != null" >
+        building_no = #{record.building_no,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cell_status != null" >
+        cell_status = #{record.cell_status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bb_cell_t
+    set id = #{record.id,jdbcType=INTEGER},
+      cell_id = #{record.cell_id,jdbcType=VARCHAR},
+      cell_name = #{record.cell_name,jdbcType=VARCHAR},
+      cell_kind = #{record.cell_kind,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      longitude = #{record.longitude,jdbcType=DECIMAL},
+      latitude = #{record.latitude,jdbcType=DECIMAL},
+      lac = #{record.lac,jdbcType=VARCHAR},
+      ci = #{record.ci,jdbcType=VARCHAR},
+      building_no = #{record.building_no,jdbcType=VARCHAR},
+      cell_status = #{record.cell_status,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicom.ceo.model.BbCellT" >
+    update bb_cell_t
+    <set >
+      <if test="cell_name != null" >
+        cell_name = #{cell_name,jdbcType=VARCHAR},
+      </if>
+      <if test="cell_kind != null" >
+        cell_kind = #{cell_kind,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="lac != null" >
+        lac = #{lac,jdbcType=VARCHAR},
+      </if>
+      <if test="ci != null" >
+        ci = #{ci,jdbcType=VARCHAR},
+      </if>
+      <if test="building_no != null" >
+        building_no = #{building_no,jdbcType=VARCHAR},
+      </if>
+      <if test="cell_status != null" >
+        cell_status = #{cell_status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+      and cell_id = #{cell_id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicom.ceo.model.BbCellT" >
+    update bb_cell_t
+    set cell_name = #{cell_name,jdbcType=VARCHAR},
+      cell_kind = #{cell_kind,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=DECIMAL},
+      latitude = #{latitude,jdbcType=DECIMAL},
+      lac = #{lac,jdbcType=VARCHAR},
+      ci = #{ci,jdbcType=VARCHAR},
+      building_no = #{building_no,jdbcType=VARCHAR},
+      cell_status = #{cell_status,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+      and cell_id = #{cell_id,jdbcType=VARCHAR}
+  </update>
+</mapper>
